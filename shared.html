@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<title>WebSocket Test</title>
+<script language="javascript" type="text/javascript">
+var worker = new SharedWorker("shared.js");
+worker.port.onmessage = function(event)
+{
+	var pre = document.createElement("p");
+	pre.style.wordWrap = "break-word";
+	pre.innerHTML = '<span style="color: blue;">RESPONSE: ' + event.data+'</span>';
+	document.getElementById("output").appendChild(pre);
+};
+worker.port.postMessage("ws request to api goes here");
+</script>
+
+<h2>WebSocket Test</h2>
+
+<div id="output"></div>
+
+<button onclick="var a = Math.random();worker.port.postMessage(a);alert(a)">send a message</button> 
